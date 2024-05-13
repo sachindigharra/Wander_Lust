@@ -56,7 +56,6 @@ body{
 }
 .card-body{
     padding: 0 !important;
-   
 }
 .card-text{
     color: #222222 !important;
@@ -138,5 +137,48 @@ body{
     display: flex;
     align-items: center;
   }
-  /* Serach box setting */
+ /* booking  */
+ .book-content{
+
+    display: flex;
+    flex-wrap: wrap;
+   
+    align-items: center;
+    
+ }
+ /* profile button */
+ .dropdown-menu{
+    margin-left: -4rem !important;
+ }
+ .btn-spent a{
+    color: #ffff;
+    background-color: rgb(61, 227, 69);
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+ }
+ .btn-spent a:hover{
+    color: #ffff;
+    background-color: rgb(61, 227, 69);
+ }
+ .btn-book a{
+    color: #ffff;
+    background-color: rgba(27, 124, 220, 0.763);
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+ }
+ .btn-book a:hover{
+    color: #ffff;
+    background-color: rgba(27, 124, 220, 0.763);
+ }
+.btn-log a {
+    background-color: #fe424d !important;
+    color: #ffff !important;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+ }
+.btn-log a:hover{
+    background-color: #fe424d !important;
+    color: #ffff !important;
+  }
+  
   

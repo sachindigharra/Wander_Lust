@@ -1,5 +1,5 @@
 const User=require('../model/user.js');
-
+const Listing=require('../model/listing.js')
 module.exports.renderSignup=(req,res)=>{
     res.render('users/signup.ejs')
 }
@@ -30,6 +30,7 @@ module.exports.userLoginForm=(req,res)=>{
 module.exports.Login=async(req,res)=>{
     req.flash('success','Welcome! back to WanderLust')
     // user directly logged in
+    //console.log(req.user.username)
     let redirectUrl=res.locals.redirectUrl || '/listings'
     res.redirect(redirectUrl);
 };
@@ -45,3 +46,49 @@ module.exports.Logout=(req,res,next)=>{
     })
 
 };
+module.exports.bookings=async (req,res)=>{
+    if(req.user==undefined){
+        return res.redirect('/login')
+    }
+    const user=req.user;
+
+   const users= await User.findById(user.id).populate({path:'bookings'})
+   
+   
+   if(users){
+    
+        return res.render('users/books.ejs',{users});
+   }
+
+        req.flash('error',"sorry! you havn't any bookins")
+        res.redirect('/listings')
+   
+}
+module.exports.booked=async(req,res,next)=>{
+    if(req.user==undefined){
+        return res.redirect('/login')
+    }
+    const user=req.user;
+    let id=user._id;
+    
+   const users= await User.findById(id)
+   let listing = await Listing.findById(req.params.id);
+   
+    users.bookings.push(listing);
+    await users.save()
+    req.flash('success','Hotel booked! thank You')
+    res.redirect('/listings')
+}
+module.exports.deleteBooking=async(req,res,next)=>{
+    if(req.user==undefined){
+        return res.redirect('/login')
+    }
+    const user=req.user;
+    let id=user._id;
+    let listingId=req.params.id;
+    console.log(listingId)
+    let updateUser=await User.findByIdAndUpdate(id,{$pull:{bookings:listingId}});
+    console.log(updateUser)
+    req.flash('success','Booking Canceld!')
+    res.redirect('/bookings')
+}

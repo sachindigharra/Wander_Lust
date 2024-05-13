@@ -39,4 +39,14 @@ router
 router.get('/logout',
     userControllers.Logout
 )
+router.get('/bookings',
+        
+    userControllers.bookings
+)
+router.post('/book/:id',
+    userControllers.booked
+)
+router.put('/book/:id',
+    userControllers.deleteBooking
+)
 module.exports=router;

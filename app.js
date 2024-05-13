@@ -15,7 +15,7 @@ const passport=require('passport');
 const localStrategy = require('passport-local')
 const User=require('./model/user.js')
 //<--- Connection eastblish with Database--->
-// const mongoUrl='mongodb://127.0.0.1:27017/wanderlust'
+//const mongoUrl='mongodb://127.0.0.1:27017/wanderlust'
 const Db_URL = process.env.ATLASDB_URL;
 async function main(){
     await mongoose.connect(Db_URL);
@@ -61,6 +61,7 @@ passport.deserializeUser(User.deserializeUser())
 const listingRouter = require("./routes/listing.js");
 const reviewRouter = require("./routes/review.js");
 const userRouter = require('./routes/user.js');
+const Listing = require('./model/listing.js')
 
 
 app.set("view engine", "ejs");
